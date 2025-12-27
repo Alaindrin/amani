@@ -38,6 +38,7 @@ connectDB()
   })
   .catch((error) => {
     console.error('❌ Database connection failed:', error.message);
+    console.log('⚠️ Server will continue without database connection');
   });
 
 // Root endpoint - confirms server is running
