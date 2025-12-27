@@ -17,6 +17,20 @@ app.use(express.json());
 // Connect to MongoDB
 connectDB();
 
+// Root endpoint - confirms server is running
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Portfolio API Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      quotations: '/api/quotations',
+      messages: '/api/messages'
+    }
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
