@@ -68,6 +68,13 @@ app.get('/api/health', (req, res) => {
 
 // Quotation endpoints
 app.post('/api/quotations', async (req, res) => {
+  if (!dbConnected) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
   try {
     const { name, email, phone, company, projectType, budget, timeline, description } = req.body;
     
