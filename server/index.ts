@@ -23,8 +23,22 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Connect to MongoDB
-connectDB();
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  res.status(500).json({ success: false, message: 'Internal server error' });
+});
+
+// Connect to MongoDB with error handling
+let dbConnected = false;
+connectDB()
+  .then(() => {
+    dbConnected = true;
+    console.log('✅ Database connected successfully');
+  })
+  .catch((error) => {
+    console.error('❌ Database connection failed:', error.message);
+  });
 
 // Root endpoint - confirms server is running
 app.get('/', (req, res) => {
@@ -32,6 +46,7 @@ app.get('/', (req, res) => {
     status: 'ok', 
     message: 'Portfolio API Server',
     version: '1.0.0',
+    database: dbConnected ? 'connected' : 'disconnected',
     endpoints: {
       health: '/api/health',
       quotations: '/api/quotations',
@@ -42,7 +57,12 @@ app.get('/', (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is running' });
+  res.json({ 
+    status: 'ok', 
+    message: 'Server is running',
+    database: dbConnected ? 'connected' : 'disconnected',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Quotation endpoints
