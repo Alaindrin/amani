@@ -43,30 +43,26 @@ app.use(express.json());
 
 // Database connection variables
 let dbConnected = false;
-let Quotation = null;
-let Message = null;
+let Quotation: any = null;
+let Message: any = null;
 
-// Try to connect to database
-try {
-  const connectDB = require('./db/mongodb.js').default;
-  const QuotationModel = require('./models/Quotation.js').default;
-  const MessageModel = require('./models/Message.js').default;
-  
-  connectDB()
-    .then(() => {
-      dbConnected = true;
-      Quotation = QuotationModel;
-      Message = MessageModel;
-      console.log('✅ Database connected successfully');
-    })
-    .catch((error) => {
-      console.error('❌ Database connection failed:', error.message);
-      console.log('⚠️ Server will continue without database connection');
-    });
-} catch (error) {
-  console.error('❌ Database modules failed to load:', error.message);
-  console.log('⚠️ Server will continue without database connection');
-}
+// Try to connect to database using dynamic imports
+(async () => {
+  try {
+    const { default: connectDB } = await import('./db/mongodb.js');
+    const { default: QuotationModel } = await import('./models/Quotation.js');
+    const { default: MessageModel } = await import('./models/Message.js');
+    
+    await connectDB();
+    dbConnected = true;
+    Quotation = QuotationModel;
+    Message = MessageModel;
+    console.log('✅ Database connected successfully');
+  } catch (error: any) {
+    console.error('❌ Database connection failed:', error.message);
+    console.log('⚠️ Server will continue without database connection');
+  }
+})();
 
 // Root endpoint
 app.get('/', (req, res) => {
