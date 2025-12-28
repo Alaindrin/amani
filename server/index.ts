@@ -85,6 +85,56 @@ app.get('/api/health', (req, res) => {
 });
 
 // Quotation endpoints
+app.get('/api/quotations', async (req, res) => {
+  if (!dbConnected || !Quotation) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
+  try {
+    const quotations = await Quotation.find().sort({ created_at: -1 });
+    res.json({
+      success: true,
+      data: quotations,
+    });
+  } catch (error) {
+    console.error('Error fetching quotations:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch quotations',
+    });
+  }
+});
+
+app.get('/api/quotations/stats', async (req, res) => {
+  if (!dbConnected || !Quotation) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
+  try {
+    const total = await Quotation.countDocuments();
+    const pending = await Quotation.countDocuments({ status: 'pending' });
+    const reviewed = await Quotation.countDocuments({ status: 'reviewed' });
+    const responded = await Quotation.countDocuments({ status: 'responded' });
+    
+    res.json({
+      success: true,
+      data: { total, pending, reviewed, responded },
+    });
+  } catch (error) {
+    console.error('Error fetching quotation stats:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch quotation stats',
+    });
+  }
+});
+
 app.post('/api/quotations', async (req, res) => {
   if (!dbConnected || !Quotation) {
     return res.status(503).json({
@@ -119,6 +169,90 @@ app.post('/api/quotations', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to submit quotation request',
+    });
+  }
+});
+
+// Message endpoints
+app.get('/api/messages', async (req, res) => {
+  if (!dbConnected || !Message) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
+  try {
+    const messages = await Message.find().sort({ created_at: -1 });
+    res.json({
+      success: true,
+      data: messages,
+    });
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch messages',
+    });
+  }
+});
+
+app.get('/api/messages/stats', async (req, res) => {
+  if (!dbConnected || !Message) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
+  try {
+    const total = await Message.countDocuments();
+    const unread = await Message.countDocuments({ status: 'unread' });
+    const read = await Message.countDocuments({ status: 'read' });
+    const replied = await Message.countDocuments({ status: 'replied' });
+    
+    res.json({
+      success: true,
+      data: { total, unread, read, replied },
+    });
+  } catch (error) {
+    console.error('Error fetching message stats:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch message stats',
+    });
+  }
+});
+
+app.post('/api/messages', async (req, res) => {
+  if (!dbConnected || !Message) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not available',
+    });
+  }
+  
+  try {
+    const { name, email, message } = req.body;
+    
+    const newMessage = new Message({
+      name,
+      email,
+      message,
+    });
+
+    await newMessage.save();
+    
+    res.status(201).json({
+      success: true,
+      message: 'Message sent successfully',
+      id: newMessage._id,
+    });
+  } catch (error) {
+    console.error('Error creating message:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send message',
     });
   }
 });
