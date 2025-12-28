@@ -11,8 +11,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "node server/simple.js",
-    "start": "node server/simple.js",
+    "server": "tsx server/index.ts",
+    "start": "tsx server/index.ts",
     "migrate": "tsx server/migrate-sqlite-to-mongodb.ts"
   },
   "dependencies": {
