@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
+    console.log('CORS request from origin:', origin);
+    
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
@@ -21,14 +23,17 @@ app.use(cors({
     
     // Allow all Vercel preview deployments
     if (origin.includes('vercel.app')) {
+      console.log('Allowing Vercel deployment:', origin);
       return callback(null, true);
     }
     
     if (allowedOrigins.includes(origin)) {
+      console.log('Allowing origin from list:', origin);
       return callback(null, true);
     }
     
-    callback(new Error('Not allowed by CORS'));
+    console.log('Rejecting origin:', origin);
+    callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
