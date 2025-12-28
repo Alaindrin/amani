@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GraduationCap, Zap, Brain, ExternalLink, Glasses } from "lucide-react";
+import { GraduationCap, Zap, Brain, ExternalLink, Glasses, Wallet } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -7,8 +7,11 @@ import elearningImg from "@/assets/elearning-project.jpg";
 import smartmeterImg from "@/assets/smartmeter-project.jpg";
 import aiAuditorImg from "@/assets/ai-auditor-project.jpg";
 
-// VR Agriculture project image - using placeholder
+// VR Agriculture project image
 const vrAgriImg = "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=600&fit=crop";
+
+// QuickPay fintech project image
+const quickPayImg = "https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?crop=entropy&cs=srgb&fm=jpg&w=800&h=600&fit=crop";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -82,6 +85,25 @@ const Projects = () => {
       ],
       tech: ["Unity", "VR SDK", "AI/ML", "IoT Sensors", "Python", "React"],
       color: "from-accent via-primary to-accent"
+    },
+    {
+      icon: Wallet,
+      image: quickPayImg,
+      title: "QuickPay",
+      subtitle: "Your Digital Wallet, Everywhere",
+      description: "A revolutionary fintech solution for seamless global payments.",
+      fullDescription: "QuickPay is a cutting-edge fintech platform that consolidates all your payment cards into one secure digital wallet. Make instant transfers, receive money, and complete transactions anywhere in the world—all from your phone, without carrying physical cards. Experience the freedom of cardless payments with bank-level security and lightning-fast processing.",
+      features: [
+        "Unified digital wallet for all payment cards",
+        "Instant money transfers worldwide",
+        "Cardless payments via phone",
+        "Multi-currency support",
+        "Bank-level encryption and security",
+        "Real-time transaction notifications",
+        "Global acceptance at millions of merchants"
+      ],
+      tech: ["React Native", "Node.js", "Blockchain", "Payment Gateway API", "Encryption"],
+      color: "from-primary to-accent"
     }
   ];
 
