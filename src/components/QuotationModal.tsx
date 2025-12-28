@@ -71,9 +71,9 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
         <form onSubmit={handleSubmit} className="space-y-6 mt-4">
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name *</Label>
+              <Label htmlFor="quotation-name">Full Name *</Label>
               <Input
-                id="name"
+                id="quotation-name"
                 name="name"
                 required
                 placeholder="John Doe"
@@ -82,9 +82,9 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email Address *</Label>
+              <Label htmlFor="quotation-email">Email Address *</Label>
               <Input
-                id="email"
+                id="quotation-email"
                 name="email"
                 type="email"
                 required
@@ -96,9 +96,9 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="quotation-phone">Phone Number</Label>
               <Input
-                id="phone"
+                id="quotation-phone"
                 name="phone"
                 type="tel"
                 placeholder="+250 123 456 789"
@@ -107,9 +107,9 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="company">Company/Organization</Label>
+              <Label htmlFor="quotation-company">Company/Organization</Label>
               <Input
-                id="company"
+                id="quotation-company"
                 name="company"
                 placeholder="Your Company"
                 className="bg-background border-border"
@@ -118,7 +118,7 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="projectType">Project Type *</Label>
+            <Label htmlFor="quotation-projectType">Project Type *</Label>
             <Select name="projectType" required>
               <SelectTrigger className="bg-background border-border">
                 <SelectValue placeholder="Select project type" />
@@ -137,7 +137,7 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="budget">Budget Range</Label>
+              <Label htmlFor="quotation-budget">Budget Range</Label>
               <Select name="budget">
                 <SelectTrigger className="bg-background border-border">
                   <SelectValue placeholder="Select budget range" />
@@ -154,7 +154,7 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="timeline">Expected Timeline</Label>
+              <Label htmlFor="quotation-timeline">Expected Timeline</Label>
               <Select name="timeline">
                 <SelectTrigger className="bg-background border-border">
                   <SelectValue placeholder="Select timeline" />
@@ -172,9 +172,9 @@ const QuotationModal = ({ open, onOpenChange }: QuotationModalProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Project Description *</Label>
+            <Label htmlFor="quotation-description">Project Description *</Label>
             <Textarea
-              id="description"
+              id="quotation-description"
               name="description"
               required
               rows={6}
