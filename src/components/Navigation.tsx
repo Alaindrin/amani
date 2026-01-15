@@ -49,7 +49,7 @@ const Navigation = ({ onQuotationClick }: NavigationProps) => {
             onClick={() => scrollToSection("hero")}
             className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300"
           >
-            Amani Alain
+            Amani Alai<Link to="/admin" className="hover:text-blue-600">n</Link>
           </button>
 
           {/* Desktop Navigation */}
@@ -64,15 +64,7 @@ const Navigation = ({ onQuotationClick }: NavigationProps) => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 border border-gray-300 rounded-lg"
-              onClick={() => setIsAdminLoginOpen(true)}
-            >
-              <Shield className="w-4 h-4 mr-2" />
-              Admin
-            </Button>
+
             <Button
               onClick={onQuotationClick}
               className="bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg"
@@ -105,18 +97,7 @@ const Navigation = ({ onQuotationClick }: NavigationProps) => {
                   {link.label}
                 </button>
               ))}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 w-full justify-start border border-gray-300 rounded-lg"
-                onClick={() => {
-                  setIsAdminLoginOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <Shield className="w-4 h-4 mr-2" />
-                Admin Login
-              </Button>
+
               <Button
                 onClick={() => {
                   onQuotationClick();

@@ -1,4 +1,5 @@
 import { Github, Linkedin, Twitter, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
-              Amani Alain
+              Amani Alai<Link to="/admin" className="bg-gradient-primary bg-clip-text text-transparent">n</Link>
             </h3>
             <p className="text-muted-foreground">Software Developer | Problem Solver | Innovator</p>
           </div>
@@ -47,7 +48,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted-foreground flex items-center justify-center gap-2">
-            Built with <Heart className="w-4 h-4 text-accent fill-accent" /> by Amani Alain © {currentYear}
+            Built with <Heart className="w-4 h-4 text-accent fill-accent" /> by Amani Alai<Link to="/admin" className="text-muted-foreground">n</Link> © {currentYear}
           </p>
         </div>
       </div>
